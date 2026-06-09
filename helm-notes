@@ -28,12 +28,25 @@ helm upgrade infosys
 11] Rollback the deployment
    helm history infosys
    helm rollback infosys revisionnumber
+###################################################
+CREATE HELM PACKAGE AND PUBLISH
+####################################################
 12] Package
 helm package .
-helm repo add stable https://charts.helm.sh/stable
-helm repo update
-helm search repo mysql
-helm install name stable/mysql
+scp -r infosys-x.x.tgz root@helm.ocp4.example.com:/var/www/html/charts/
+ssh root@helm.ocp4.ocp4.example.com
+cd /var/www/html/charts
+cat index.yaml
+Add new content to index.yaml-BELOW STEP
+helm repo index .
+helm repo list
+helm repo add sweden http://helm.ocp4.example.com/charts
+helm search repo --versions
+helm show values sweden/infosys
+helm install test1 sweden/infosys
+
+#################
+
 
 remainigsteps -not tried
 https://medium.com/htc-research-engineering-blog/a-simple-example-for-helm-chart-fbb5c7208e94
